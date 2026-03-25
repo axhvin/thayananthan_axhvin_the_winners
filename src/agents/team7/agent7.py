@@ -11,7 +11,7 @@ class Agent7(KartAgent):
         self.agent_positions = []
         self.obs = None
         self.isEnd = False
-        self.name = "Team7" # replace with your chosen name
+        self.name = "Thayananthan Axhvin" # replace with your chosen name
 
     def reset(self):
         self.obs, _ = self.env.reset()
@@ -21,8 +21,12 @@ class Agent7(KartAgent):
         return self.isEnd
 
     def choose_action(self, obs):
-        acceleration = random.random()
-        steering = random.random()
+        acceleration = 1.0       #pour avancer
+        points = obs['paths_start']   #récupérer les noeuds
+        x = 0.0
+        if len(points)>2:
+            x = points[2][0] # pour le décalage nerveux
+        steering = x*0.7     # coefficient qui rend l'agent nerveux
         action = {
             "acceleration": acceleration,
             "steer": steering,
